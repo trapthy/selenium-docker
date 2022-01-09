@@ -2,7 +2,6 @@ pipeline {
     agent any
     stages {
         stage('Build Jars') {
-
             steps {
                 bat 'mvn clean package -DskipTests'
             }
