@@ -7,7 +7,7 @@ pipeline {
                 sh 'mvn clean package -DskipTests'
             }
         }
-        stage('Build Image') {
+        stage('Build Images') {
             steps {
                 script {
                 	app = docker.build("suryajit7/selenium-docker")
