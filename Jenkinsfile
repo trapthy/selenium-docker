@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build Jar') {
+        stage('Build Jars') {
 
             steps {
                 sh 'mvn clean package -DskipTests'
@@ -10,7 +10,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                	app = docker.build("vinsdocker/selenium-docker")
+                	app = docker.build("suryajit7/selenium-docker")
                 }
             }
         }
