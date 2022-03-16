@@ -1,17 +1,41 @@
-FROM openjdk:8u191-jre-alpine3.8
+FROM maven:3.6.1-jdk-8-alpine AS package
 
-RUN apk add curl jq
+RUN apk add --update \
+    curl \
+    jq
 
-WORKDIR /usr/suryajit/practice
+RUN mkdir -p /app
+WORKDIR /app
 
-ADD target/selenium-docker.jar          selenium-docker.jar
-ADD target/selenium-docker-tests.jar    selenium-docker-tests.jar
-ADD target/libs                         libs
+COPY pom.xml  .
+COPY healthcheck.sh     .
+RUN mvn -e -B dependency:resolve
 
-ADD book-flight-module.xml              book-flight-module.xml
-ADD search-module.xml                   search-module.xml
+COPY src      ./src
+RUN mvn package -DskipTests
 
-ADD healthcheck.sh healthcheck.sh
-RUN dos2unix healthcheck.sh
+WORKDIR /app/
 
-ENTRYPOINT sh healthcheck.sh
+ENTRYPOINT ["/bin/sh"]
+CMD ["healthcheck.sh"]
+
+FROM openjdk:8-jre-alpine
+
+RUN mkdir -p /jar
+WORKDIR /jar/
+
+COPY --from=package /app/target/selenium-docker.jar         .
+COPY --from=package /app/target/selenium-docker-tests.jar   .
+COPY --from=package /app/target/libs                        ./libs
+COPY testng.xml                                             .
+COPY run.sh                                                 .
+
+WORKDIR /jar/
+
+ENV BROWSER=chrome
+ENV HUB_HOST=hub
+ENV MODULE=testng.xml
+
+ENTRYPOINT ["/bin/sh"]
+CMD ["run.sh"]
+

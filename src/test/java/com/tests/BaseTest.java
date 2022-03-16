@@ -19,7 +19,7 @@ public class BaseTest {
     @BeforeTest
     public void setupDriver(ITestContext ctx) throws MalformedURLException {
 
-        String host = "localhost";
+        String host = "hub";
         MutableCapabilities dc;
 
         if(System.getProperty("BROWSER") != null &&
