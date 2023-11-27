@@ -1,7 +1,6 @@
 pipeline {
     agent {
         label {
-        //  label "docker-agent"
           label "gp-agent"
       }
      }
