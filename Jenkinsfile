@@ -14,7 +14,7 @@ pipeline {
                 sh 'mvn clean package -DskipTests'
             }
         }
-// Testing
+// Testing stage simulation
         // //stage('Build Image') {
         //             steps {
         //                 bat 'docker build -t="suryajit7/selenium-docker" .'
