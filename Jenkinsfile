@@ -11,7 +11,7 @@ pipeline {
 
 environment {
     // get branch name
-    branchname = "${env.GIT_BRANCH}"
+    branch = "${GIT_BRANCH.split("/")[1]}"
 
     }
 	
@@ -20,7 +20,7 @@ environment {
 	stage('echo stage') {
             steps {
 		
-                sh 'echo $branchname'
+                sh 'echo $branch'
 		
 		     
         }
@@ -28,11 +28,11 @@ environment {
         stage('Build Jars') {
 		
 		when {
-         		branch 'origin/dev'
+         		branch 'dev'
      	 	     }
             steps {
-		
-                sh 'mvn clean package -DskipTests'
+		sh 'echo hello'
+               // sh 'mvn clean package -DskipTests'
             }
         }
 
