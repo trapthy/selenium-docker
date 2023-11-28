@@ -15,8 +15,7 @@ pipeline {
             }
         }
 
-        // // Testing
-	    // stage('Build Image') {
+
         //             steps {
         //                 bat 'docker build -t="suryajit7/selenium-docker" .'
         //             }
