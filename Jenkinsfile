@@ -11,13 +11,20 @@ pipeline {
 
 environment {
     // get branch name
-    branchname= "env.GIT_BRANCH"
+    branchname = "env.GIT_BRANCH"
 
     }
 	
     stages {
+
+	stage('echo stage') {
+            steps {
+		
+                sh 'echo $branchname'
+            }
+        }
         stage('Build Jars') {
-		echo "$branchname"
+		
 		when {
          		branch 'dev'
      	 	     }
