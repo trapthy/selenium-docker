@@ -10,7 +10,7 @@ pipeline {
     	}
 
 environment {
-    
+    // get branch name
     branchname= env.GIT_BRANCH
 
     }
