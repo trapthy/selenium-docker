@@ -8,9 +8,17 @@ pipeline {
       		maven 'MAVEN_HOME' 
       		
     	}
+
+environment {
+    
+    branchname= env.GIT_BRANCH
+
+    }
+	
     stages {
         stage('Build Jars') {
             steps {
+		echo "$branchname"
                 sh 'mvn clean package -DskipTests'
             }
         }
