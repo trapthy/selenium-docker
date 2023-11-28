@@ -8,14 +8,25 @@ pipeline {
       		maven 'MAVEN_HOME' 
       		
     	}
+
+environment {
+    
+    branchname= env.GIT_BRANCH
+
+    }
+	
     stages {
         stage('Build Jars') {
+		when {
+         		branch 'dev'
+     	 	     }
             steps {
+		echo "$branchname"
                 sh 'mvn clean package -DskipTests'
             }
         }
-// Testing release
-        // //stage('Build Image') {
+
+
         //             steps {
         //                 bat 'docker build -t="suryajit7/selenium-docker" .'
         //             }
