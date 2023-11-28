@@ -11,7 +11,7 @@ pipeline {
 
 environment {
     // get branch name
-    branchname = "env.GIT_BRANCH"
+    branchname = "env.BRANCH_NAME"
 
     }
 	
@@ -21,8 +21,11 @@ environment {
             steps {
 		
                 sh 'echo $branchname'
+		     if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'staging') {
+        echo 'This is not master or staging'
             }
         }
+	}
         stage('Build Jars') {
 		
 		when {
