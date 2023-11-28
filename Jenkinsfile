@@ -11,7 +11,7 @@ pipeline {
 
 environment {
     // get branch name
-    branchname = "env.BRANCH_NAME"
+    branchname = "env.GIT_BRANCH"
 
     }
 	
@@ -21,20 +21,20 @@ environment {
             steps {
 		
                 sh 'echo $branchname'
-		sh 'printenv'
+		
 		     
         }
 	}
-  //       stage('Build Jars') {
+        stage('Build Jars') {
 		
-		// when {
-  //        		branch 'dev'
-  //    	 	     }
-  //           steps {
+		when {
+         		branch 'origin/dev'
+     	 	     }
+            steps {
 		
-  //               sh 'mvn clean package -DskipTests'
-  //           }
-  //       }
+                sh 'mvn clean package -DskipTests'
+            }
+        }
 
 
         //             steps {
