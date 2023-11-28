@@ -21,9 +21,7 @@ environment {
             steps {
 		
                 sh 'echo $branchname'
-		     if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'staging') {
-        echo 'This is not master or staging'
-            }
+		     
         }
 	}
         stage('Build Jars') {
