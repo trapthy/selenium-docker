@@ -4,14 +4,14 @@ pipeline {
           label "gp-agent"
       }
      }
-	tools { 
-      		maven 'MAVEN_HOME' 
+	// tools { 
+ //      		maven 'MAVEN_HOME' 
       		
-    	}
+ //    	}
 
 environment {
     // get branch name
-    branchname = ${env.GIT_BRANCH}
+    branchname = "${env.GIT_BRANCH}"
 
     }
 	
