@@ -17,11 +17,12 @@ environment {
 	
     stages {
         stage('Build Jars') {
+		echo "$branchname"
 		when {
          		branch 'dev'
      	 	     }
             steps {
-		echo "$branchname"
+		
                 sh 'mvn clean package -DskipTests'
             }
         }
